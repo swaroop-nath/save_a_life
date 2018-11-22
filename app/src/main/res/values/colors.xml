@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFC107</color>
+    <color name="colorPrimaryDark">#FFA000</color>
+    <color name="colorAccent">#03A9F4</color>
+    <color name="colorIcons">#FFFFFF</color>
+    <color name="primaryText">#191919</color>
+    <color name="secondaryText">#2f2f2f</color>
+    <color name="dividerColor">#BDBDBD</color>
+    <color name="primaryTextLogin">#010101</color>
+    <color name="secondaryTextLogin">#0d0d0d</color>
+    <color name="signInActivityHeader">#000000</color>
+    <color name="buttonGradientEnd">#FFC107</color>
+
+</resources>

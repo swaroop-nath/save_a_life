@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Save a Life</string>
+    <string name="sign_out">Sign Out</string>
+    <string-array name="blood_group">
+        <item>A+</item>
+        <item>A-</item>
+        <item>B+</item>
+        <item>O+</item>
+        <item>O-</item>
+        <item>AB+</item>
+        <item>AB-</item>
+    </string-array>
+    <string name="forDonors">For Donors</string>
+    <string name="eligibilityInfoForUser">*Please mark the toggles accordingly in order to notify eligibility for blood donation</string>
+    <string name="aidsCheck">I ensure that I <b>don\'t</b> have <b>AIDS</b></string>
+    <string name="hepatitisCheck">I have not been tested <b>positive</b> for <b>Hepatitis Virus</b></string>
+    <string name="alcoholCheck">I have not consumed <b>alcohol</b> in the past <b>24 hours</b></string>
+    <string name="moreEligibilityCriteria"><b>More</b></string>
+
+    <string-array name="eligibility_criteria">
+        <item>I ensure that I <b>don\'t</b> have <b>AIDS</b></item>
+        <item>I have not been tested <b>positive</b> for <b>Hepatitis Virus</b></item>
+        <item>I have not consumed <b>alcohol</b> in the past <b>24 hours</b></item>
+        <item>I don\'t suffer from <b>Hyper Tension</b>, <b>Kidney Problems</b>, <b>Epilepsy</b>, and <b>Diabetes</b></item>
+        <item>I haven\'t been treated for <b>Malaria</b> within the last <b>3 months</b></item>
+        <item>I haven\'t undergone <b>immunization</b> within the <b>last month</b></item>
+        <item>I haven\'t undergone any <b>major dental procedure</b> within the <b>last month</b></item>
+    </string-array>
+
+    <string name="askForBlood">Ask For Blood</string>
+    <string name="askForBloodWhichGroupPrefix">Ask For</string>
+    <string name="askForBloodWhichGroupSuffix">Type</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="loginTextSize">25sp</dimen>
+    <dimen name="userDetailTextSize">17sp</dimen>
+    <dimen name="signInActivityHeaderSize">20sp</dimen>
+    <dimen name="signInActivityTextSize">15sp</dimen>
+    <dimen name="eligibilityInfoForUserTextSize">12sp</dimen>
+    <dimen name="iNeedBloodTextSize">18sp</dimen>
+</resources>

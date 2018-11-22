@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="visible" type="id"/>
+    <item name="masked" type="id"/>
+
+    <item name="signInActivityMenuSignOut" type="id">sign_out</item>
+    <item name="signInActivityMenuUserProfile" type="id">user_profile</item>
+
+    <item name="maleRadioButton" type="id">male_radio_button</item>
+    <item name="femaleRadioButton" type="id">female_radio_button</item>
+    <item name="otherRadioButton" type="id">other_radio_button</item>
+    <item name="userDetailConstraintLayout" type="id">user_detail_constraint_layout</item>
+    <item name="firstName" type="id">first_name</item>
+    <item name="lastName" type="id">last_name</item>
+    <item name="emailId" type="id">email_id</item>
+    <item name="phoneNumber" type="id">phone_number</item>
+    <item name="radioGroupGender" type="id">radio_group_gender</item>
+    <item name="countryCodeSpinner" type="id">country_code_spinner</item>
+    <item name="bloodGroupSpinner" type="id">blood_group_spinner</item>
+    <item name="verifyMail" type="id">verify_mail</item>
+    <item name="verifyPhone" type="id">verify_phone</item>
+    <item name="saveCredential" type="id">save_credential</item>
+    <item name="dateOfBirth" type="id">date_of_birth</item>
+    <item name="verificationPhoneNumber" type="id">verification_phone_number</item>
+    <item name="oneTimePassword" type="id">one_time_password</item>
+    <item name="progressFragmentText" type="id">progress_fragment_text</item>
+
+    <item name="signInActivityParentView" type="id">sign_in_activity_parent_view</item>
+    <item name="forDonors" type="id">for_donors</item>
+    <item name="askForBlood" type="id">ask_for_blood</item>
+    <item name="switchAIDS" type="id">switch_aids</item>
+    <item name="switchHepatitis" type="id">switch_hepatitis</item>
+    <item name="switchAlcohol" type="id">switch_alcohol</item>
+    <item name="listEligibilityCriteriaText" type="id">list_eligibility_criteria_text</item>
+    <item name="switchListItem" type="id">switch_list_item</item>
+    <item name="signInBloodGroupSpinner" type="id">sign_in_blood_group_spinner</item>
+</resources>
