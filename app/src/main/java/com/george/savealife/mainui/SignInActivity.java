@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ import com.firebase.ui.auth.AuthUI;
 import com.george.savealife.R;
 import com.george.savealife.signinflow.UserDetail;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,8 +28,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.FirebaseMessagingService;
+import com.google.firebase.functions.FirebaseFunctions;
+import com.google.firebase.functions.HttpsCallableResult;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -49,6 +51,7 @@ public class SignInActivity extends AppCompatActivity implements EligibilityCrit
     private String selectedBloodGroup;
     private ScrollView parentView;
     private Map<String, Object> userProfile;
+    private FirebaseFunctions tempFunc;
 
     private static final String CITY = "city";
     private static final String BLOOD_GROUP = "bloodGroup";
@@ -63,6 +66,14 @@ public class SignInActivity extends AppCompatActivity implements EligibilityCrit
         switch (item.getItemId()) {
             case R.id.signInActivityMenuSignOut:
                 AuthUI.getInstance().signOut(this);
+                startActivityForResult(
+                        AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders
+                                (Arrays.asList(new AuthUI.IdpConfig.PhoneBuilder().build(),
+                                        new AuthUI.IdpConfig.EmailBuilder().build(),
+                                        new AuthUI.IdpConfig.GoogleBuilder().build())).
+                                setTheme(R.style.LoginTheme).setLogo(R.mipmap.logo).
+                                setIsSmartLockEnabled(false).build(),
+                        RC_SIGN_IN);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -117,10 +128,11 @@ public class SignInActivity extends AppCompatActivity implements EligibilityCrit
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        GoogleApiAvailability.getInstance().makeGooglePlayServicesAvailable(this);
+//        GoogleApiAvailability.getInstance().makeGooglePlayServicesAvailable(this);
         setContentView(R.layout.activity_sign_in);
 
         userProfile = new HashMap<>();
+        tempFunc = FirebaseFunctions.getInstance();
 
         flags = new int[7];
         mAuth = FirebaseAuth.getInstance();
@@ -136,14 +148,19 @@ public class SignInActivity extends AppCompatActivity implements EligibilityCrit
                 } else {
                     Toast.makeText(SignInActivity.this, "You are logged out", Toast.LENGTH_SHORT).show();
                     destroyComponents();
-                    startActivityForResult(
-                            AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders
-                                    (Arrays.asList(new AuthUI.IdpConfig.PhoneBuilder().build(),
-                                            new AuthUI.IdpConfig.EmailBuilder().build(),
-                                            new AuthUI.IdpConfig.GoogleBuilder().build())).
-                                    setTheme(R.style.LoginTheme).setLogo(R.mipmap.logo).
-                                    setIsSmartLockEnabled(false).build(),
-                            RC_SIGN_IN);
+                    Log.e("Auth State Listener","Components destroyed, starting activity...");
+                    try {
+                        startActivityForResult(
+                                AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders
+                                        (Arrays.asList(new AuthUI.IdpConfig.PhoneBuilder().build(),
+                                                new AuthUI.IdpConfig.EmailBuilder().build(),
+                                                new AuthUI.IdpConfig.GoogleBuilder().build())).
+                                        setTheme(R.style.LoginTheme).setLogo(R.mipmap.logo).
+                                        setIsSmartLockEnabled(false).build(),
+                                RC_SIGN_IN);
+                    } catch (Exception exp) {
+                        Log.e("SIGN_IN_EXCEPTION",exp.getMessage());
+                    }
                 }
             }
         };
@@ -232,6 +249,19 @@ public class SignInActivity extends AppCompatActivity implements EligibilityCrit
 
     public void startProcess(View view) {
         Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
+        notifyUsers("zero").addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull Task<String> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(SignInActivity.this, task.getResult(), Toast.LENGTH_SHORT).show();
+                }
+                else if (!task.isSuccessful()) {
+                    Toast.makeText(SignInActivity.this, "Task Not Successfull", Toast.LENGTH_SHORT).show();
+                }
+                else
+                    Toast.makeText(SignInActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
@@ -257,5 +287,25 @@ public class SignInActivity extends AppCompatActivity implements EligibilityCrit
                 else
                     flags[2] = 0;
         }
+    }
+    private Task<String> notifyUsers(String text) {
+        // Create the arguments to the callable function.
+        Map<String, Object> data = new HashMap<>();
+        data.put("token", text); //Put Firebase Instance ID token here
+        data.put("city", true); //Put the city in which the blood is needed, plus write code for two more fields to incorporate locality and blood group which is needed
+
+        return tempFunc
+                .getHttpsCallable("helloWorld")
+                .call(data)
+                .continueWith(new Continuation<HttpsCallableResult, String>() {
+                    @Override
+                    public String then(@NonNull Task<HttpsCallableResult> task) throws Exception {
+                        // This continuation runs on either success or failure, but if the task
+                        // has failed then getResult() will throw an Exception which will be
+                        // propagated down.
+                        String result = (String) task.getResult().getData();
+                        return result;
+                    }
+                });
     }
 }
