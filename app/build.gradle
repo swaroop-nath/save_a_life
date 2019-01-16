@@ -34,6 +34,7 @@ dependencies {
     compile 'com.google.firebase:firebase-messaging:17.3.4'
 
     compile 'com.android.support:appcompat-v7:26'
+    compile 'com.android.support:support-compat:26.1.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
     compile 'com.hbb20:ccp:2.1.4'

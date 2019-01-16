@@ -18,6 +18,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 import com.firebase.ui.auth.AuthUI;
 import com.george.savealife.R;
+import com.george.savealife.notificationflow.Manager;
 import com.george.savealife.signinflow.UserDetail;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.tasks.Continuation;
@@ -95,6 +96,7 @@ public class SignInActivity extends AppCompatActivity implements EligibilityCrit
     protected void onResume() {
         super.onResume();
         GoogleApiAvailability.getInstance().makeGooglePlayServicesAvailable(this);
+        Manager.getInstance().setContext(getApplicationContext());
         mAuth.addAuthStateListener(mAuthStateListener);
     }
 
