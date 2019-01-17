@@ -1,0 +1,58 @@
+[debug] [2019-01-17T06:11:53.155Z] ----------------------------------------------------------------------
+[debug] [2019-01-17T06:11:53.161Z] Command:       D:\Softwares\Node.js\node-v8.11.3\node.exe D:\Softwares\Node.js\node-v8.11.3\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2019-01-17T06:11:53.161Z] CLI Version:   6.2.2
+[debug] [2019-01-17T06:11:53.161Z] Platform:      win32
+[debug] [2019-01-17T06:11:53.161Z] Node Version:  v8.11.3
+[debug] [2019-01-17T06:11:53.162Z] Time:          Thu Jan 17 2019 11:41:53 GMT+0530 (India Standard Time)
+[debug] [2019-01-17T06:11:53.162Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-01-17T06:11:53.179Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-01-17T06:11:53.180Z] > authorizing via signed-in user
+[debug] [2019-01-17T06:11:53.180Z] [iam] checking project save-a-life-21630 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2019-01-17T06:11:53.183Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-01-17T06:11:53.183Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-01-17T06:11:53.666Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-17T06:11:53.704Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/save-a-life-21630:testIamPermissions  
+
+[debug] [2019-01-17T06:11:55.630Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'save-a-life-21630'...
+[info] 
+[info] i  deploying functions
+[info] Running command: npm --prefix "%RESOURCE_DIR%" run lint
+[info] +  functions: Finished running predeploy script.
+[debug] [2019-01-17T06:13:05.624Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase serve --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "dependencies": {
+    "firebase-admin": "~6.0.0",
+    "firebase-functions": "^2.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.12.0",
+    "eslint-plugin-promise": "^3.6.0"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[debug] [2019-01-17T06:13:05.627Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/save-a-life-21630?view=CONSUMER_VIEW  
+ 
+[debug] [2019-01-17T06:13:05.627Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/save-a-life-21630?view=CONSUMER_VIEW  
+ 
+[debug] [2019-01-17T06:13:08.681Z] <<< HTTP RESPONSE 200
+[info] +  functions: all necessary APIs are enabled
+[debug] [2019-01-17T06:13:27.256Z] Error: connect ETIMEDOUT 172.217.161.10:443
+    at Object._errnoException (util.js:992:11)
+    at _exceptionWithHostPort (util.js:1014:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1186:14)
+[error] 
+[error] Error: Server Error. connect ETIMEDOUT 172.217.161.10:443
